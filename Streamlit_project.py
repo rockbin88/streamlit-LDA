@@ -146,7 +146,7 @@ if uploaded_file is not None:
 else: 
     st.info("Awaiting for PDF file to be uploaded")
     if st.button('Press to use example PDF file'): 
-        filename = open("INPUT URL", 'rb')
+        filename = open("https://github.com/rockbin88/streamlit-LDA/blob/main/fomcminutes20210127.pdf", 'rb')
         st.markdown('INPUT DOC')
         pdf = PyPDF2.PdfFileReader(uploaded_file)
     

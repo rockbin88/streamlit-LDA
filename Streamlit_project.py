@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import streamlit as st
 import re
 import numpy as np
@@ -25,17 +19,11 @@ import spacy
 import pyLDAvis
 import pyLDAvis.gensim_models as gensimvis
 import matplotlib.pyplot as plt
-
-
 import nltk; nltk.download('stopwords'); nltk.download('punkt'); nltk.download('wordnet')
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize, RegexpTokenizer
 from nltk.stem import WordNetLemmatizer
-
-
-# In[ ]:
-
 
 # Stream lit 
 
@@ -48,25 +36,13 @@ st.set_page_config(page_title='Analyzing Federal Reserve committee minutes using
 st.title("Analyzing Fed reserve minutes")
 st.header("Classification Edition")
 
-
-# In[ ]:
-
-
 #Side bar
 st.sidebar.header("Upload your PDF")
 uploaded_file = st.sidebar.file_uploader("Upload your PDF", type='pdf')
 st.sidebar.markdown(""" [Example PDF input file](URL)""")
 
-
-# In[ ]:
-
-
 #Main panel
 st.subheader('Dataset')
-
-
-# In[ ]:
-
 
 def clean_text(data): 
     words = nltk.word_tokenize(data)
@@ -110,7 +86,7 @@ def clean_text(data):
 
 
 # LDA Model 
-
+@st.cache(suppress_st_warning=True)
 def lda_model(corpus, id2word):
     lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                                id2word=id2word,
@@ -126,11 +102,6 @@ def lda_model(corpus, id2word):
     
     return vis
     
-
-
-# In[ ]:
-
-
 #Read PDF
 
 text = ''
@@ -174,7 +145,7 @@ if uploaded_file is not None:
     
 else: 
     st.info("Awaiting for PDF file to be uploaded")
-    if st.button('Pres to use example PDF file'): 
+    if st.button('Press to use example PDF file'): 
         filename = open("INPUT URL", 'rb')
         st.markdown('INPUT DOC')
         pdf = PyPDF2.PdfFileReader(uploaded_file)
